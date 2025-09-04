@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#d4af37">
+    <meta name="description" content="Discover and shop luxury clothing with Fynd's elegant fashion platform">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Fynd">
+    
+    <title>Wishlist - Fynd</title>
+        <link rel="manifest" href="../manifest.json">
+    <link rel="apple-touch-icon" href="../icons/icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../icons/icon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../icons/icon-16x16.png">
+    
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/wishlist.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="brand-container">
+                    <a href="home.html" class="brand">Fynd</a>
+                </div>
+                <div class="wishlist-count">
+                    <span id="wishlistCount">0</span> items
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="wishlist-header">
+                <h1>My Wishlist</h1>
+                <p>Items you swiped right on</p>
+            </div>
+            
+            <div class="wishlist-container" id="wishlistContainer">
+                <!-- Wishlist items will be loaded here -->
+            </div>
+        </div>
+    </main>
+
+    <nav class="bottom-nav">
+        <div class="nav-container">
+            <a href="home.html" class="nav-item" data-page="home">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="wishlist.html" class="nav-item active" data-page="wishlist">
+                <i class="fas fa-heart"></i>
+                <span>Wishlist</span>
+            </a>
+            <a href="cart.html" class="nav-item" data-page="cart">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Cart</span>
+                <span class="cart-badge">0</span>
+            </a>
+            <a href="profile.html" class="nav-item" data-page="profile">
+                <i class="fas fa-user"></i>
+                <span>Profile</span>
+            </a>
+        </div>
+    </nav>
+
+        <script src="../js/global.js"></script>
+    <script src="../js/pwa.js"></script>
+    <script src="../js/wishlist.js"></script>
+</body>
+</html>

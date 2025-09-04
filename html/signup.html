@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#d4af37">
+    <meta name="description" content="Discover and shop luxury clothing with Fynd's elegant fashion platform">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Fynd">
+    
+    <title>Sign Up - Fynd</title>
+        <link rel="manifest" href="../manifest.json">
+    <link rel="apple-touch-icon" href="../icons/icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../icons/icon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../icons/icon-16x16.png">
+    
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/signup.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="home.html" class="brand">Fynd</a>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="signup-container">
+                <div class="signup-card">
+                    <div class="signup-header">
+                        <h1>Join Fynd</h1>
+                        <p>Create your account and start shopping</p>
+                    </div>
+                    
+                    <form class="signup-form" id="signupForm">
+                        <div class="form-group">
+                            <label for="name" class="form-label">Full Name</label>
+                            <input type="text" id="name" name="name" class="form-input" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" id="email" name="email" class="form-input" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" id="password" name="password" class="form-input" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="confirmPassword" class="form-label">Confirm Password</label>
+                            <input type="password" id="confirmPassword" name="confirmPassword" class="form-input" required>
+                        </div>
+                        
+                        <div class="form-options">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="terms" required>
+                                <span class="checkmark"></span>
+                                I agree to the <a href="#" class="link-gold">Terms & Conditions</a>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="newsletter">
+                                <span class="checkmark"></span>
+                                Subscribe to newsletter
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Create Account</button>
+                    </form>
+                    
+                    <div class="signup-footer">
+                        <p>Already have an account? <a href="login.html" class="link-gold">Sign in</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+        <script src="../js/global.js"></script>
+    <script src="../js/pwa.js"></script>
+    <script src="../js/signup.js"></script>
+</body>
+</html>
