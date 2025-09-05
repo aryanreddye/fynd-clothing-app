@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         currentCard.style.transform = `translateX(${deltaX}px) rotate(${rotation}deg)`;
         
-        // Show swipe indicators
+        // Show swipe indicators first commit 
         if (deltaX > 50) {
             currentCard.querySelector('.swipe-indicator.right').classList.add('show');
             currentCard.querySelector('.swipe-indicator.left').classList.remove('show');
