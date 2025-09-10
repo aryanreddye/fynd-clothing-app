@@ -1,4 +1,3 @@
-/* Fynd-Clothing Global Styles */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Cinzel:wght@400;500;600;700&display=swap');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
 
@@ -12,24 +11,24 @@
   --gray-light: #f8f9fa;
   --gray-medium: #6c757d;
   --gray-dark: #343a40;
-  
+
   /* Typography */
   --font-serif: 'Playfair Display', serif;
   --font-sans: 'Inter', sans-serif;
-  
+
   /* Spacing */
   --spacing-xs: 0.5rem;
   --spacing-sm: 1rem;
   --spacing-md: 1.5rem;
   --spacing-lg: 2rem;
   --spacing-xl: 3rem;
-  
+
   /* Shadows */
   --shadow-light: 0 2px 8px rgba(0, 0, 0, 0.1);
   --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.15);
   --shadow-heavy: 0 8px 32px rgba(0, 0, 0, 0.2);
   --shadow-glow: 0 0 20px rgba(212, 175, 55, 0.3);
-  
+
   /* Transitions */
   --transition-fast: 0.2s ease;
   --transition-medium: 0.3s ease;
@@ -62,9 +61,7 @@ h2 { font-size: 2rem; }
 h3 { font-size: 1.5rem; }
 h4 { font-size: 1.25rem; }
 
-p {
-  margin-bottom: var(--spacing-sm);
-}
+p { margin-bottom: var(--spacing-sm); }
 
 /* Header Styles */
 .header {
@@ -321,7 +318,6 @@ p {
 .text-gold { color: var(--gold-primary); }
 .text-white { color: var(--primary-white); }
 .text-black { color: var(--primary-black); }
-
 .bg-black { background-color: var(--primary-black); }
 .bg-white { background-color: var(--primary-white); }
 .bg-gold { background-color: var(--gold-primary); }
@@ -343,43 +339,19 @@ p {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .container {
-    padding: 0 var(--spacing-sm);
-  }
-  
-  .main-content {
-    margin-top: 70px;
-    padding: var(--spacing-sm) 0;
-  }
-  
+  .container { padding: 0 var(--spacing-sm); }
+  .main-content { margin-top: 70px; padding: var(--spacing-sm) 0; }
   h1 { font-size: 2rem; }
   h2 { font-size: 1.5rem; }
-  
-  .grid-2, .grid-3, .grid-4 {
-    grid-template-columns: 1fr;
-  }
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 480px) {
-  .header {
-    padding: var(--spacing-xs) var(--spacing-sm);
-  }
-  
-  .brand {
-    font-size: 1.5rem;
-  }
-  
-  .nav-item {
-    min-width: 50px;
-  }
-  
-  .nav-item i {
-    font-size: 1rem;
-  }
-  
-  .nav-item span {
-    font-size: 0.7rem;
-  }
+  .header { padding: var(--spacing-xs) var(--spacing-sm); }
+  .brand { font-size: 1.5rem; }
+  .nav-item { min-width: 50px; }
+  .nav-item i { font-size: 1rem; }
+  .nav-item span { font-size: 0.7rem; }
 }
 
 /* Animations */
@@ -388,9 +360,7 @@ p {
   to { opacity: 1; transform: translateY(0); }
 }
 
-.fade-in {
-  animation: fadeIn 0.6s ease-out;
-}
+.fade-in { animation: fadeIn 0.6s ease-out; }
 
 @keyframes slideIn {
   from { transform: translateX(-100%); }
@@ -402,20 +372,13 @@ p {
   50% { text-shadow: 0 0 20px rgba(212, 175, 55, 0.6); }
 }
 
-.glow {
-  animation: glow 2s ease-in-out infinite;
-}
+.glow { animation: glow 2s ease-in-out infinite; }
 
 /* Loading States */
-.loading {
-  opacity: 0.6;
-  pointer-events: none;
-}
+.loading { opacity: 0.6; pointer-events: none; }
 
 /* Focus States */
-.btn:focus,
-.form-input:focus,
-.nav-item:focus {
+.btn:focus, .form-input:focus, .nav-item:focus {
   outline: 2px solid var(--gold-primary);
   outline-offset: 2px;
 }
@@ -458,17 +421,6 @@ p {
   transition: transform 0.3s ease;
 }
 
-.pwa-notification.success {
-  background: #28a745;
-  color: white;
-}
-
-.pwa-notification.warning {
-  background: #ffc107;
-  color: var(--primary-black);
-}
-
-.pwa-notification.info {
-  background: #17a2b8;
-  color: white;
-}
+.pwa-notification.success { background: #28a745; color: white; }
+.pwa-notification.warning { background: #ffc107; color: var(--primary-black); }
+.pwa-notification.info { background: #17a2b8; color: white; }

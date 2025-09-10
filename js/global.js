@@ -139,7 +139,7 @@ function formatPrice(price) {
 function getProducts() {
   return [
     // Female clothing
-    { id: 1, name: "Luxury Silk Blouse", price: 89.99, category: "Tops", gender: "female", image: "../images/img1.jpg" },
+    { id: 1, name: "Luxury Silk Ble", price: 89.99, category: "Tops", gender: "female", image: "../images/img1.jpg" },
     { id: 2, name: "Elegant Evening Dress", price: 199.99, category: "Dresses", gender: "female", image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400&h=500&fit=crop" },
     { id: 3, name: "Classic White Shirt", price: 59.99, category: "Tops", gender: "female", image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=500&fit=crop" },
     { id: 4, name: "Cashmere Sweater", price: 149.99, category: "Tops", gender: "female", image: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=400&h=500&fit=crop" },
