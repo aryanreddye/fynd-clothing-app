@@ -1,5 +1,3 @@
-
-
 // Fynd-Clothing Global JavaScript
 
 const AppState = {
@@ -99,64 +97,31 @@ function formatPrice(price) {
 function getProducts() {
   return [
     // Female clothing
-    { id: 1, name: "Luxury Silk Blouse", price: 89.99, category: "Tops", gender: "female", image: "../images/img1.jpg" },
-    { id: 2, name: "Elegant Evening Dress", price: 199.99, category: "Dresses", gender: "female", image: "../images/img2.png" },
-    { id: 3, name: "Classic White Shirt", price: 59.99, category: "Tops", gender: "female", image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=500&fit=crop" },
-    { id: 4, name: "Cashmere Sweater", price: 149.99, category: "Tops", gender: "female", image: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=400&h=500&fit=crop" },
-    { id: 5, name: "Summer Floral Dress", price: 129.99, category: "Dresses", gender: "female", image: "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=400&h=500&fit=crop" },
-    { id: 6, name: "Silk Camisole", price: 79.99, category: "Tops", gender: "female", image: "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&h=500&fit=crop" },
-    { id: 7, name: "Cocktail Dress", price: 179.99, category: "Dresses", gender: "female", image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=500&fit=crop" },
-    { id: 8, name: "Knit Cardigan", price: 99.99, category: "Outerwear", gender: "female", image: "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=400&h=500&fit=crop" },
+    { id: 1, name: "Luxury Silk Blouse", price: 1289.99, category: "Tops", gender: "female", image: "../images/img1.png" },
+    { id: 2, name: "Elegant Evening Dress", price: 199.99, category: "Dresses", gender: "female", image: "../images/img2.jpg" },
+    { id: 3, name: "Classic White Shirt", price: 59.99, category: "Tops", gender: "female", image: "../images/img3.jpg" },
+    { id: 4, name: "Cashmere Sweater", price: 149.99, category: "Tops", gender: "female", image: "../images/img4.jpg" },
+    { id: 5, name: "Summer Floral Dress", price: 129.99, category: "Dresses", gender: "female", image: "../images/img5.jpg" },
+    { id: 6, name: "Silk Camisole", price: 79.99, category: "Tops", gender: "female", image: "../images/img6.jpg" },
+    { id: 7, name: "Cocktail Dress", price: 179.99, category: "Dresses", gender: "female", image: "../images/img7.jpg" },
+    { id: 8, name: "Knit Cardigan", price: 99.99, category: "Outerwear", gender: "female", image: "../images/img8.jpg" },
+    { id: 8, name: "Knit Cardigan", price: 99.99, category: "Outerwear", gender: "female", image: "../images/img9.jpg" },
+    { id: 8, name: "Knit Cardigan", price: 99.99, category: "Outerwear", gender: "female", image: "../images/img10.jpg" },
+    { id: 8, name: "Knit Cardigan", price: 99.99, category: "Outerwear", gender: "female", image: "../images/img11.jpg" },
+    { id: 8, name: "Knit Cardigan", price: 99.99, category: "Outerwear", gender: "female", image: "../images/img12.jpg" },
+    { id: 8, name: "Knit Cardigan", price: 99.99, category: "Outerwear", gender: "female", image: "../images/img13.jpg" },
+    { id: 8, name: "Knit Cardigan", price: 99.99, category: "Outerwear", gender: "female", image: "../images/img14.jpg" },
+    { id: 8, name: "Knit Cardigan", price: 99.99, category: "Outerwear", gender: "female", image: "../images/img15.jpg" },
     
     // Male clothing
-    { id: 9, name: "Premium Denim Jacket", price: 129.99, category: "Outerwear", gender: "male", image: "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=400&h=500&fit=crop" },
-    { id: 10, name: "Tailored Trousers", price: 79.99, category: "Bottoms", gender: "male", image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=500&fit=crop" },
-    { id: 11, name: "Classic Oxford Shirt", price: 69.99, category: "Tops", gender: "male", image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=500&fit=crop" },
-    { id: 12, name: "Wool Blazer", price: 189.99, category: "Outerwear", gender: "male", image: "https://images.unsplash.com/photo-1564257631407-3deb25e91d1b?w=400&h=500&fit=crop" },
-    { id: 13, name: "Chino Pants", price: 89.99, category: "Bottoms", gender: "male", image: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=400&h=500&fit=crop" },
-    { id: 14, name: "Polo Shirt", price: 49.99, category: "Tops", gender: "male", image: "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=400&h=500&fit=crop" },
-    { id: 15, name: "Leather Jacket", price: 299.99, category: "Outerwear", gender: "male", image: "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&h=500&fit=crop" },
-    { id: 16, name: "Slim Fit Jeans", price: 99.99, category: "Bottoms", gender: "male", image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=500&fit=crop" }
-  ];
-}
-
-function initApp() {
-  AppState.currentPage = window.location.pathname.split('/').pop() || 'welcome.html';
-  setActiveNavItem();
-  updateCartBadge();
-  
-  const mainContent = document.querySelector('.main-content');
-  if (mainContent) mainContent.classList.add('fade-in');
-}
-
-initApp();
-
-
-function formatPrice(price) {
-  return `₹${price.toFixed(2)}`;
-}
-
-function getProducts() {
-  return [
-    // Female clothing
-    { id: 1, name: "Luxury Silk Ble", price: 89.99, category: "Tops", gender: "female", image: "../images/img1.jpg" },
-    { id: 2, name: "Elegant Evening Dress", price: 199.99, category: "Dresses", gender: "female", image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400&h=500&fit=crop" },
-    { id: 3, name: "Classic White Shirt", price: 59.99, category: "Tops", gender: "female", image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=500&fit=crop" },
-    { id: 4, name: "Cashmere Sweater", price: 149.99, category: "Tops", gender: "female", image: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=400&h=500&fit=crop" },
-    { id: 5, name: "Summer Floral Dress", price: 129.99, category: "Dresses", gender: "female", image: "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=400&h=500&fit=crop" },
-    { id: 6, name: "Silk Camisole", price: 79.99, category: "Tops", gender: "female", image: "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&h=500&fit=crop" },
-    { id: 7, name: "Cocktail Dress", price: 179.99, category: "Dresses", gender: "female", image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=500&fit=crop" },
-    { id: 8, name: "Knit Cardigan", price: 99.99, category: "Outerwear", gender: "female", image: "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=400&h=500&fit=crop" },
-    
-    // Male clothing
-    { id: 9, name: "Premium Denim Jacket", price: 129.99, category: "Outerwear", gender: "male", image: "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=400&h=500&fit=crop" },
-    { id: 10, name: "Tailored Trousers", price: 79.99, category: "Bottoms", gender: "male", image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=500&fit=crop" },
-    { id: 11, name: "Classic Oxford Shirt", price: 69.99, category: "Tops", gender: "male", image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=500&fit=crop" },
-    { id: 12, name: "Wool Blazer", price: 189.99, category: "Outerwear", gender: "male", image: "https://images.unsplash.com/photo-1564257631407-3deb25e91d1b?w=400&h=500&fit=crop" },
-    { id: 13, name: "Chino Pants", price: 89.99, category: "Bottoms", gender: "male", image: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=400&h=500&fit=crop" },
-    { id: 14, name: "Polo Shirt", price: 49.99, category: "Tops", gender: "male", image: "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=400&h=500&fit=crop" },
-    { id: 15, name: "Leather Jacket", price: 299.99, category: "Outerwear", gender: "male", image: "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&h=500&fit=crop" },
-    { id: 16, name: "Slim Fit Jeans", price: 99.99, category: "Bottoms", gender: "male", image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400&h=500&fit=crop" }
+    { id: 9, name: "Premium Denim Jacket", price: 129.99, category: "Outerwear", gender: "male", image: "../images/img1.1.png" },
+    { id: 10, name: "Tailored Trousers", price: 79.99, category: "Bottoms", gender: "male", image: "../images/img1.2.png" },
+    { id: 11, name: "Classic Oxford Shirt", price: 69.99, category: "Tops", gender: "male", image: "../images/img1.3.png" },
+    { id: 12, name: "Wool Blazer", price: 189.99, category: "Outerwear", gender: "male", image: "../images/img1.4.png" },
+    { id: 13, name: "Chino Pants", price: 89.99, category: "Bottoms", gender: "male", image: "../images/img1.5.jpg" },
+    { id: 14, name: "Polo Shirt", price: 49.99, category: "Tops", gender: "male", image: "../images/img1.6.png" },
+    { id: 15, name: "Leather Jacket", price: 299.99, category: "Outerwear", gender: "male", image: "../images/img1.7.jpg" },
+    { id: 16, name: "Slim Fit Jeans", price: 99.99, category: "Bottoms", gender: "male", image: "../images/img1.8.png" }
   ];
 }
 
