@@ -97,31 +97,31 @@ function formatPrice(price) {
 function getProducts() {
   return [
     // Female clothing
-    { id: 1, name: "Luxury Silk Blouse", price: 1289.99, category: "Tops", gender: "female", image: "../images/img1.png" },
-    { id: 2, name: "Elegant Evening Dress", price: 199.99, category: "Dresses", gender: "female", image: "../images/img2.jpg" },
-    { id: 3, name: "Classic White Shirt", price: 59.99, category: "Tops", gender: "female", image: "../images/img3.jpg" },
-    { id: 4, name: "Cashmere Sweater", price: 149.99, category: "Tops", gender: "female", image: "../images/img4.jpg" },
-    { id: 5, name: "Summer Floral Dress", price: 129.99, category: "Dresses", gender: "female", image: "../images/img5.jpg" },
-    { id: 6, name: "Silk Camisole", price: 79.99, category: "Tops", gender: "female", image: "../images/img6.jpg" },
-    { id: 7, name: "Cocktail Dress", price: 179.99, category: "Dresses", gender: "female", image: "../images/img7.jpg" },
-    { id: 8, name: "Knit Cardigan", price: 99.99, category: "Outerwear", gender: "female", image: "../images/img8.jpg" },
-    { id: 8, name: "Knit Cardigan", price: 99.99, category: "Outerwear", gender: "female", image: "../images/img9.jpg" },
-    { id: 8, name: "Knit Cardigan", price: 99.99, category: "Outerwear", gender: "female", image: "../images/img10.jpg" },
-    { id: 8, name: "Knit Cardigan", price: 99.99, category: "Outerwear", gender: "female", image: "../images/img11.jpg" },
-    { id: 8, name: "Knit Cardigan", price: 99.99, category: "Outerwear", gender: "female", image: "../images/img12.jpg" },
-    { id: 8, name: "Knit Cardigan", price: 99.99, category: "Outerwear", gender: "female", image: "../images/img13.jpg" },
-    { id: 8, name: "Knit Cardigan", price: 99.99, category: "Outerwear", gender: "female", image: "../images/img14.jpg" },
-    { id: 8, name: "Knit Cardigan", price: 99.99, category: "Outerwear", gender: "female", image: "../images/img15.jpg" },
+    { id: 1, name: "Luxury Silk Red", price: 2999.99, category: "Tops", gender: "female", image: "../images/img1.png" },
+    { id: 2, name: "Pink Casual", price: 1999.99, category: "Dresses", gender: "female", image: "../images/img2.jpg" },
+    { id: 3, name: "Elegant Pink", price: 1599.99, category: "Tops", gender: "female", image: "../images/img3.jpg" },
+    { id: 4, name: "Summer Yellow", price: 1499.99, category: "Tops", gender: "female", image: "../images/img4.jpg" },
+    { id: 5, name: "Luxury Black formal", price: 2999.99, category: "Dresses", gender: "female", image: "../images/img5.jpg" },
+    { id: 6, name: "Cute Pink", price: 1799.99, category: "Tops", gender: "female", image: "../images/img6.jpg" },
+    { id: 7, name: "Pink with Bow", price: 1799.99, category: "Dresses", gender: "female", image: "../images/img7.jpg" },
+    { id: 8, name: "Elegant Green", price: 1999.99, category: "Outerwear", gender: "female", image: "../images/img8.jpg" },
+    { id: 8, name: "Popular Purple", price: 1999.99, category: "Outerwear", gender: "female", image: "../images/img9.jpg" },
+    { id: 8, name: "Black Luxury", price: 3999.99, category: "Outerwear", gender: "female", image: "../images/img10.jpg" },
+    { id: 8, name: "Casual Orange", price: 999.99, category: "Outerwear", gender: "female", image: "../images/img11.jpg" },
+    { id: 8, name: "Casual Floral", price: 999.99, category: "Outerwear", gender: "female", image: "../images/img12.jpg" },
+    { id: 8, name: "Cute Pink", price: 1999.99, category: "Outerwear", gender: "female", image: "../images/img13.jpg" },
+    { id: 8, name: "Knit Cardigan Floral", price: 2999.99, category: "Outerwear", gender: "female", image: "../images/img14.jpg" },
+    { id: 8, name: "Red Luxury", price: 4999.99, category: "Outerwear", gender: "female", image: "../images/img15.jpg" },
     
     // Male clothing
-    { id: 9, name: "Premium Denim Jacket", price: 129.99, category: "Outerwear", gender: "male", image: "../images/img1.1.png" },
-    { id: 10, name: "Tailored Trousers", price: 79.99, category: "Bottoms", gender: "male", image: "../images/img1.2.png" },
-    { id: 11, name: "Classic Oxford Shirt", price: 69.99, category: "Tops", gender: "male", image: "../images/img1.3.png" },
-    { id: 12, name: "Wool Blazer", price: 189.99, category: "Outerwear", gender: "male", image: "../images/img1.4.png" },
-    { id: 13, name: "Chino Pants", price: 89.99, category: "Bottoms", gender: "male", image: "../images/img1.5.jpg" },
-    { id: 14, name: "Polo Shirt", price: 49.99, category: "Tops", gender: "male", image: "../images/img1.6.png" },
-    { id: 15, name: "Leather Jacket", price: 299.99, category: "Outerwear", gender: "male", image: "../images/img1.7.jpg" },
-    { id: 16, name: "Slim Fit Jeans", price: 99.99, category: "Bottoms", gender: "male", image: "../images/img1.8.png" }
+    { id: 9, name: "Blue Suit", price: 3999.99, category: "Outerwear", gender: "male", image: "../images/img1.1.png" },
+    { id: 10, name: "Formal White", price: 1999.99, category: "Bottoms", gender: "male", image: "../images/img1.2.png" },
+    { id: 11, name: "Casual Black", price: 1699.99, category: "Tops", gender: "male", image: "../images/img1.3.png" },
+    { id: 12, name: "Casual Grey", price: 1899.99, category: "Outerwear", gender: "male", image: "../images/img1.4.png" },
+    { id: 13, name: "Dark Hoodie", price: 2999.99, category: "Bottoms", gender: "male", image: "../images/img1.5.jpg" },
+    { id: 14, name: "Denim Jacket", price: 4999.99, category: "Tops", gender: "male", image: "../images/img1.6.png" },
+    { id: 15, name: "Denims", price: 1899.99, category: "Outerwear", gender: "male", image: "../images/img1.7.jpg" },
+    { id: 16, name: "Track Pant", price: 1499.99, category: "Bottoms", gender: "male", image: "../images/img1.8.png" }
   ];
 }
 

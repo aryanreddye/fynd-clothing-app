@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function renderCartSummary() {
         const cart = AppState.cart;
         const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
-        const shipping = subtotal > 0 ? 10 : 0;
+        const shipping = subtotal > 0 ? 100 : 0;
         const total = subtotal + shipping;
 
         cartSummary.innerHTML = `
