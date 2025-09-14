@@ -5,6 +5,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const swipeLeftBtn = document.getElementById('swipeLeft');
     const swipeRightBtn = document.getElementById('swipeRight');
     const genderBtns = document.querySelectorAll('.gender-btn');
+    const filterBtn = document.getElementById('filterBtn');
+
+    // Filter button click handler
+    filterBtn.addEventListener('click', () => {
+        // Save current state if needed
+        localStorage.setItem('lastGender', currentGender);
+        localStorage.setItem('lastIndex', currentCardIndex.toString());
+        
+        // Navigate to filter page
+        window.location.href = 'filter.html';
+    });
     
     let allProducts = [];
     let currentProducts = [];

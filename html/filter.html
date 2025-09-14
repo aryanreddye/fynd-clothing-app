@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filters - Fynd</title>
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/filter.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="filter-page">
+        <div class="header">
+            <span class="title">Filters</span>
+            <span class="close" onclick="window.history.back()">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+
+        <div class="filter-container">
+            <aside class="categories">
+                <button class="category-btn active" data-category="style">Style</button>
+                <button class="category-btn" data-category="brand">Brand</button>
+                <button class="category-btn" data-category="price">Price Range</button>
+                <button class="category-btn" data-category="size">Size</button>
+                <button class="category-btn" data-category="color">Color</button>
+                <button class="category-btn" data-category="occasion">Occasion</button>
+            </aside>
+
+            <section class="options">
+                <!-- Options will be dynamically loaded here -->
+            </section>
+        </div>
+
+        <div class="filter-actions">
+            <button class="clear-btn">Clear All</button>
+            <button class="apply-btn">Apply Filters</button>
+        </div>
+    </div>
+
+    <script src="/js/filter.js"></script>
+</body>
+</html>

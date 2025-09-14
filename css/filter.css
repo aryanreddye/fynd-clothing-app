@@ -1,0 +1,111 @@
+.filter-btn {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.5rem 1rem;
+    background: #000;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.filter-page {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    z-index: 1000;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.filter-container {
+    display: flex;
+    height: calc(100vh - 120px);
+}
+
+.categories {
+    width: 30%;
+    border-right: 1px solid #eee;
+    overflow-y: auto;
+}
+
+.category-btn {
+    width: 100%;
+    padding: 1rem;
+    text-align: left;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.category-btn.active {
+    background: #f5f5f5;
+    border-left: 3px solid #000;
+}
+
+.options {
+    width: 70%;
+    padding: 1rem;
+    overflow-y: auto;
+}
+
+.options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.option-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.option-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+}
+
+.filter-actions {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    gap: 1rem;
+    background: #fff;
+    border-top: 1px solid #eee;
+}
+
+.clear-btn, .apply-btn {
+    flex: 1;
+    padding: 0.8rem;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+}
+
+.clear-btn {
+    background: #fff;
+    border: 1px solid #000;
+}
+
+.apply-btn {
+    background: #000;
+    color: #fff;
+}

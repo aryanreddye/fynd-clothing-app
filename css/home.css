@@ -6,6 +6,8 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  position: relative;
+  padding: 1rem;
 }
 
 .brand-container {
@@ -27,6 +29,8 @@
 .gender-toggle-container {
   position: absolute;
   right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .gender-toggle {
@@ -48,10 +52,87 @@
   color: var(--gray-medium);
   border-radius: 20px;
   font-family: var(--font-sans);
-  font-size: 0.9rem;
-  font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
+}
+
+/* Filter Button Styles */
+.filter-btn {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 8px 16px;
+  background: var(--gold-primary);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.filter-btn:hover {
+  background: var(--gold-secondary);
+  transform: translateY(-50%) scale(1.05);
+}
+
+.filter-btn:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.filter-btn i {
+  font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .header-content {
+    padding: 0.8rem;
+  }
+
+  .brand {
+    font-size: 1.8rem;
+  }
+
+  .filter-btn {
+    left: 10px;
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+
+  .gender-toggle-container {
+    right: 10px;
+  }
+
+  .gender-btn {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .brand {
+    font-size: 1.5rem;
+  }
+
+  .filter-btn span {
+    display: none;
+  }
+
+  .filter-btn {
+    padding: 8px;
+  }
+
+  .gender-btn span {
+    display: none;
+  }
 }
 
 .gender-btn.active {
