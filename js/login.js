@@ -1,7 +1,21 @@
 // Login Page JavaScript
+import { signInWithGoogle } from './firebase.js';
+
 document.addEventListener('DOMContentLoaded', function () {
-    // If Firebase is available, enhance with social login
-    const hasFirebase = typeof window !== 'undefined' && window.firebase && window.firebase.apps;
+    // Set up Google login button
+    const googleLoginBtn = document.getElementById('googleLogin');
+    if (googleLoginBtn) {
+        googleLoginBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            try {
+                await signInWithGoogle();
+                window.location.href = 'home.html';
+            } catch (error) {
+                console.error('Google login error:', error);
+                showError(googleLoginBtn, 'Google login failed. Please try again.');
+            }
+        });
+    }
 
     const loginForm = document.getElementById('loginForm');
     const emailInput = document.getElementById('email');

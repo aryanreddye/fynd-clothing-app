@@ -42,6 +42,7 @@
 
 .form-group {
   margin-bottom: var(--spacing-md);
+  color: var(--primary-black);
 }
 
 .form-label {
@@ -49,21 +50,20 @@
   margin-bottom: var(--spacing-xs);
   font-weight: 500;
   color: var(--primary-black);
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
 }
+
+
 
 .form-input {
   width: 100%;
   padding: var(--spacing-sm);
-  border: 2px solid var(--gray-light);
+  border: 2px solid var(--primary-black);
   border-radius: 8px;
   font-family: var(--font-sans);
   font-size: 1rem;
   color: var(--primary-black);
   transition: var(--transition-fast);
-  background: var(--primary-white);
+  background-color: rgb(255, 255, 255) !important;
 }
 
 .form-input:focus {
