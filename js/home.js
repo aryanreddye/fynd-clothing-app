@@ -33,22 +33,77 @@ document.addEventListener('DOMContentLoaded', function() {
         renderCardStack();
     }
 
-    // Filter products by gender
+    // Filter products by gender and applied filters
     function filterProductsByGender() {
+        const selectedFilters = JSON.parse(localStorage.getItem('fyndFilters')) || {};
+        
         currentProducts = allProducts.filter(product => {
-            return product.gender === currentGender;
+            // First filter by gender
+            if (product.gender !== currentGender) {
+                return false;
+            }
+
+            // Then apply all other filters
+            for (const [category, values] of Object.entries(selectedFilters)) {
+                if (values.length === 0) continue; // Skip if no values selected for this category
+
+                switch (category) {
+                    case 'price':
+                        const priceMatch = values.some(rangeId => {
+                            const rangeMap = {
+                                'under-1000': [0, 1000],
+                                '1000-2000': [1000, 2000],
+                                '2000-3000': [2000, 3000],
+                                '3000-5000': [3000, 5000],
+                                'above-5000': [5000, Infinity]
+                            };
+                            const range = rangeMap[rangeId];
+                            if (!range) return false;
+                            return product.price >= range[0] && product.price < range[1];
+                        });
+                        if (!priceMatch) return false;
+                        break;
+
+                    case 'size':
+                        // Check if any of the selected sizes are available for the product
+                        const sizeMatch = values.some(size => product.size.includes(size));
+                        if (!sizeMatch) return false;
+                        break;
+
+                    case 'style':
+                    case 'brand':
+                    case 'category':
+                    case 'color':
+                        // Direct property match
+                        if (!values.includes(product[category])) {
+                            return false;
+                        }
+                        break;
+                }
+            }
+
+            return true;
         });
+
         currentCardIndex = 0;
     }
 
     // Render card stack
     function renderCardStack() {
-        if (currentProducts.length === 0) {
+        if (currentProducts.length === 0 || currentCardIndex >= currentProducts.length) {
+            const hasFilters = Object.keys(JSON.parse(localStorage.getItem('fyndFilters') || '{}')).length > 0;
             cardStack.innerHTML = `
                 <div class="empty-state">
                     <i class="fas fa-tshirt"></i>
-                    <h3>No more clothes!</h3>
-                    <p>Try switching gender or check back later for new items</p>
+                    <h3>No More Clothes Available!</h3>
+                    <p>${hasFilters ? 
+                        'Try changing your filters or switch to a different category' : 
+                        'Try switching gender or check back later for new items'}</p>
+                    ${hasFilters ? `
+                        <button class="reset-filters-btn" onclick="window.location.href='filter.html'">
+                            <i class="fas fa-filter"></i> Adjust Filters
+                        </button>
+                    ` : ''}
                 </div>
             `;
             return;

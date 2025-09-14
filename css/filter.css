@@ -1,25 +1,12 @@
-.filter-btn {
-    position: fixed;
-    top: 1rem;
-    right: 1rem;
-    padding: 0.5rem 1rem;
-    background: #000;
-    color: #fff;
-    border: none;
-    border-radius: 20px;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
 .filter-page {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background: var(--primary-white);
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    background: #fff;
     z-index: 1000;
 }
 
@@ -28,17 +15,34 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    border-bottom: 1px solid #eee;
+    background: var(--primary-white);
+    border-bottom: 1px solid var(--gray-light);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary-black);
+}
+
+.close {
+    cursor: pointer;
+    padding: 0.5rem;
 }
 
 .filter-container {
     display: flex;
+    flex: 1;
+    overflow: hidden;
     height: calc(100vh - 120px);
 }
 
 .categories {
-    width: 30%;
-    border-right: 1px solid #eee;
+    width: 35%;
+    max-width: 200px;
+    border-right: 1px solid var(--gray-light);
+    background: var(--gray-lightest);
     overflow-y: auto;
 }
 
@@ -47,19 +51,65 @@
     padding: 1rem;
     text-align: left;
     border: none;
-    background: none;
+    background: transparent;
+    color: var(--gray-dark);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid var(--gray-lighter);
     cursor: pointer;
 }
 
+.category-btn:hover {
+    background: var(--gray-lighter);
+}
+
 .category-btn.active {
-    background: #f5f5f5;
-    border-left: 3px solid #000;
+    background: var(--primary-white);
+    color: var(--gold-primary);
+    font-weight: 600;
+    border-left: 3px solid var(--gold-primary);
 }
 
 .options {
-    width: 70%;
+    flex: 1;
     padding: 1rem;
     overflow-y: auto;
+}
+
+.options h3 {
+    margin-bottom: 1rem;
+    color: var(--primary-black);
+    font-weight: 600;
+}
+
+.options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+.option-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.option-item:hover {
+    background: var(--gray-lightest);
+    border-radius: 4px;
+}
+
+.option-label {
+    flex: 1;
+    color: var(--gray-dark);
+}
+
+.option-count {
+    color: var(--gray-medium);
+    font-size: 0.9rem;
 }
 
 .options-grid {
