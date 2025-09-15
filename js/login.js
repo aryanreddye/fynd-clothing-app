@@ -12,8 +12,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const loginForm = document.getElementById('loginForm');
     const emailInput = document.getElementById('login-email');
     const passwordInput = document.getElementById('login-password');
-    const submitBtn = loginForm.querySelector('.btn-primary');
-    const googleBtn = document.getElementById('googleLoginBtn');
+    const submitBtn = loginForm.querySelector('.btn.btn-primary');
+    const googleBtn = document.getElementById('googleSignIn');
 
     // === Email + Password Login ===
     loginForm.addEventListener('submit', async (e) => {
