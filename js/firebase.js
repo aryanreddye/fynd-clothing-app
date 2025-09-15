@@ -1,11 +1,12 @@
-// firebase.js
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
 import { 
     getAuth, 
     GoogleAuthProvider, 
     signInWithPopup,
     onAuthStateChanged,
-    signOut
+    signOut,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
 import { 
     getFirestore,
@@ -17,153 +18,122 @@ import {
     arrayRemove 
 } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
 
-// Your Firebase config
+// --- Firebase Config ---
 const firebaseConfig = {
     apiKey: "AIzaSyDt0qjH1_AicVJTt7XdGiPQH3w0qudOZ_w",
     authDomain: "fynd-ee754.firebaseapp.com",
     projectId: "fynd-ee754",
-    storageBucket: "fynd-ee754.appspot.com",  // Fixed storage bucket URL
+    storageBucket: "fynd-ee754.appspot.com",
     messagingSenderId: "619665587456",
     appId: "1:619665587456:web:615f5e42503a02004187e5"
 };
 
-// Initialize Firebase
+// --- Initialize Firebase ---
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 const db = getFirestore(app);
 
-// Auth state observer
-onAuthStateChanged(auth, (user) => {
-    if (user) {
-        // User is signed in
-        const userData = {
-            uid: user.uid,
-            email: user.email,
-            displayName: user.displayName,
-            photoURL: user.photoURL
-        };
-        localStorage.setItem('user', JSON.stringify(userData));
-        createUserDocument(user);
-    } else {
-        // User is signed out
-        localStorage.removeItem('user');
-    }
-});
-
-// Create or update user document in Firestore
-async function createUserDocument(user) {
+// --- Create / Update User Document in Firestore ---
+async function createUserDocument(user, additionalData = {}) {
     if (!user) return;
 
-    const userRef = doc(db, 'users', user.uid);
+    const userRef = doc(db, "users", user.uid);
     const userSnap = await getDoc(userRef);
 
+    const baseData = {
+        uid: user.uid,
+        email: user.email,
+        displayName: user.displayName || additionalData.name || user.email.split("@")[0],
+        photoURL: user.photoURL || null,
+        cart: [],
+        wishlist: [],
+        ...additionalData
+    };
+
     if (!userSnap.exists()) {
-        try {
-            await setDoc(userRef, {
-                email: user.email,
-                displayName: user.displayName,
-                photoURL: user.photoURL,
-                cart: [],
-                wishlist: [],
-                createdAt: new Date().toISOString()
-            });
-        } catch (error) {
-            console.error("Error creating user document:", error);
-        }
+        // Create new user doc
+        await setDoc(userRef, {
+            ...baseData,
+            createdAt: new Date().toISOString(),
+            lastLogin: new Date().toISOString()
+        });
+        return baseData;
+    } else {
+        // Update login time
+        await updateDoc(userRef, {
+            lastLogin: new Date().toISOString(),
+            ...additionalData
+        });
+        return { ...userSnap.data(), ...additionalData };
     }
 }
 
-// Google Sign In
+// --- Google Sign-In ---
 async function signInWithGoogle() {
     try {
         const result = await signInWithPopup(auth, provider);
-        return result.user;
+        const user = result.user;
+        await createUserDocument(user);
+        return user;
     } catch (error) {
-        console.error("Error during Google sign in:", error);
+        console.error("Google sign-in error:", error);
         throw error;
     }
 }
 
-// Sign Out
+// --- Sign Out ---
 async function signOutUser() {
     try {
         await signOut(auth);
-        localStorage.removeItem('user');
-        window.location.href = '/html/login.html';
+        localStorage.removeItem("user");
+        window.location.href = "login.html";
     } catch (error) {
         console.error("Error signing out:", error);
         throw error;
     }
 }
 
-// Cart Operations
+// --- Cart Operations ---
 async function addToCartDB(userId, product) {
-    try {
-        const userRef = doc(db, 'users', userId);
-        await updateDoc(userRef, {
-            cart: arrayUnion(product)
-        });
-    } catch (error) {
-        console.error("Error adding to cart:", error);
-        throw error;
-    }
+    const userRef = doc(db, "users", userId);
+    await updateDoc(userRef, { cart: arrayUnion(product) });
 }
 
 async function removeFromCartDB(userId, product) {
-    try {
-        const userRef = doc(db, 'users', userId);
-        await updateDoc(userRef, {
-            cart: arrayRemove(product)
-        });
-    } catch (error) {
-        console.error("Error removing from cart:", error);
-        throw error;
-    }
+    const userRef = doc(db, "users", userId);
+    await updateDoc(userRef, { cart: arrayRemove(product) });
 }
 
-// Wishlist Operations
+// --- Wishlist Operations ---
 async function addToWishlistDB(userId, product) {
-    try {
-        const userRef = doc(db, 'users', userId);
-        await updateDoc(userRef, {
-            wishlist: arrayUnion(product)
-        });
-    } catch (error) {
-        console.error("Error adding to wishlist:", error);
-        throw error;
-    }
+    const userRef = doc(db, "users", userId);
+    await updateDoc(userRef, { wishlist: arrayUnion(product) });
 }
 
 async function removeFromWishlistDB(userId, product) {
-    try {
-        const userRef = doc(db, 'users', userId);
-        await updateDoc(userRef, {
-            wishlist: arrayRemove(product)
-        });
-    } catch (error) {
-        console.error("Error removing from wishlist:", error);
-        throw error;
-    }
+    const userRef = doc(db, "users", userId);
+    await updateDoc(userRef, { wishlist: arrayRemove(product) });
 }
 
-// Get user's data
+// --- Get User Data ---
 async function getUserData(userId) {
-    try {
-        const userRef = doc(db, 'users', userId);
-        const userSnap = await getDoc(userRef);
-        
-        if (userSnap.exists()) {
-            return userSnap.data();
-        }
-        return null;
-    } catch (error) {
-        console.error("Error getting user data:", error);
-        throw error;
-    }
+    const userRef = doc(db, "users", userId);
+    const userSnap = await getDoc(userRef);
+    return userSnap.exists() ? userSnap.data() : null;
 }
 
-// Export all necessary functions and objects
+// --- Auth State Listener ---
+onAuthStateChanged(auth, async (user) => {
+    if (user) {
+        const userData = await createUserDocument(user);
+        localStorage.setItem("user", JSON.stringify(userData));
+    } else {
+        localStorage.removeItem("user");
+    }
+});
+
+// --- Exports ---
 export {
     auth,
     db,
@@ -173,5 +143,8 @@ export {
     removeFromCartDB,
     addToWishlistDB,
     removeFromWishlistDB,
-    getUserData
+    getUserData,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    createUserDocument
 };
