@@ -1,119 +1,101 @@
-// login.js
-import { 
-    signInWithEmailAndPassword, 
-    GoogleAuthProvider, 
-    signInWithPopup,
-    onAuthStateChanged 
-} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
-import { doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
-import { auth, db } from './firebase.js';
+﻿document.addEventListener("DOMContentLoaded", () => {
+    // Check if user is already logged in FIRST
+    const currentUser = localStorage.getItem("currentUser");
+    if (currentUser) {
+        window.location.replace("./home.html");
+        return; // Stop execution if user is logged in
+    }
 
-document.addEventListener('DOMContentLoaded', function () {
-    const loginForm = document.getElementById('loginForm');
-    const emailInput = document.getElementById('login-email');
-    const passwordInput = document.getElementById('login-password');
-    const submitBtn = loginForm.querySelector('btn-primary');
-    const googleBtn = document.getElementById('googleSignIn');
+    const loginForm = document.getElementById("loginForm");
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+    const submitBtn = loginForm.querySelector("button[type=\"submit\"]");
+    const googleBtn = document.getElementById("googleSignIn");
 
-    // === Email + Password Login ===
-    loginForm.addEventListener('submit', async (e) => {
+    function showNotification(message, type = "success") {
+        const notification = document.createElement("div");
+        notification.className = `notification ${type}`;
+        notification.textContent = message;
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.remove();
+        }, 3000);
+    }
+
+    function validateEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+    }
+
+    // Handle form submission
+    loginForm.addEventListener("submit", (e) => {
         e.preventDefault();
-
+        
         const email = emailInput.value.trim();
         const password = passwordInput.value;
 
-        if (!email || !password) {
-            return showNotification('Please enter both email and password', 'error');
+        if (!validateEmail(email)) {
+            showNotification("Please enter a valid email address", "error");
+            return;
         }
 
+        // Show loading state
         submitBtn.disabled = true;
         submitBtn.textContent = "Logging in...";
 
         try {
-            const userCredential = await signInWithEmailAndPassword(auth, email, password);
-            const user = userCredential.user;
+            // Create user data
+            const userData = {
+                email: email,
+                name: email.split("@")[0],
+                cart: [],
+                wishlist: []
+            };
 
-            // Ensure Firestore doc exists
-            const userDocRef = doc(db, "users", user.uid);
-            const userDoc = await getDoc(userDocRef);
+            // Store user data
+            localStorage.setItem("currentUser", JSON.stringify(userData));
+            showNotification("Login successful! Redirecting...");
 
-            if (!userDoc.exists()) {
-                await setDoc(userDocRef, {
-                    uid: user.uid,
-                    email: user.email,
-                    name: user.displayName || "",
-                    createdAt: new Date().toISOString(),
-                    cart: [],
-                    wishlist: []
-                });
-            }
-
-            showNotification('Login successful! Redirecting...', 'success');
-
+            // Redirect after a short delay
             setTimeout(() => {
-                window.location.href = 'home.html';
+                window.location.replace("./home.html");
             }, 1000);
-
         } catch (error) {
             console.error("Login error:", error);
-            let errorMessage = "Failed to login. Please try again.";
-            if (error.code === "auth/user-not-found") {
-                errorMessage = "No account found with this email.";
-            } else if (error.code === "auth/wrong-password") {
-                errorMessage = "Incorrect password. Try again.";
-            }
-            showNotification(errorMessage, 'error');
+            showNotification("An error occurred. Please try again.", "error");
         } finally {
             submitBtn.disabled = false;
-            submitBtn.textContent = "Login";
+            submitBtn.textContent = "Sign In";
         }
     });
 
-    // === Google Login ===
+    // Handle Google sign in
     if (googleBtn) {
-        googleBtn.addEventListener('click', async () => {
-            const provider = new GoogleAuthProvider();
-
+        googleBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            
             try {
-                const result = await signInWithPopup(auth, provider);
-                const user = result.user;
+                // Demo user data
+                const userData = {
+                    email: "demo@example.com",
+                    name: "Demo User",
+                    cart: [],
+                    wishlist: []
+                };
 
-                const userDocRef = doc(db, "users", user.uid);
-                const userDoc = await getDoc(userDocRef);
-
-                if (!userDoc.exists()) {
-                    await setDoc(userDocRef, {
-                        uid: user.uid,
-                        email: user.email,
-                        name: user.displayName,
-                        createdAt: new Date().toISOString(),
-                        cart: [],
-                        wishlist: []
-                    });
-                }
-
-                showNotification('Google login successful! Redirecting...', 'success');
-
+                // Store user data
+                localStorage.setItem("currentUser", JSON.stringify(userData));
+                showNotification("Login successful! Redirecting...");
+                
+                // Redirect after a short delay
                 setTimeout(() => {
-                    window.location.href = 'home.html';
+                    window.location.replace("./home.html");
                 }, 1000);
-
             } catch (error) {
                 console.error("Google login error:", error);
-                showNotification("Google login failed. Try again.", 'error');
+                showNotification("An error occurred. Please try again.", "error");
             }
         });
     }
-
-    // === Auto redirect if already logged in ===
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
-            window.location.href = "home.html";
-        }
-    });
 });
-
-// Simple Notification
-function showNotification(message, type = "info") {
-    alert(`${type.toUpperCase()}: ${message}`);
-}

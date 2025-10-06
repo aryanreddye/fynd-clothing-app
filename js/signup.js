@@ -1,10 +1,4 @@
 // signup.js
-import { 
-    createUserWithEmailAndPassword,
-    onAuthStateChanged 
-} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
-import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
-import { auth, db } from "./firebase.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     const signupForm = document.getElementById("signupForm");
