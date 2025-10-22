@@ -319,8 +319,9 @@ document.addEventListener('DOMContentLoaded', function() {
     loadProducts();
     
     // Check authentication
-    //const userData = localStorage.getItem('fyndUser');
-    //if (!userData) {
-    //    window.location.href = 'login.html';
-    //}
+    checkAuth().then(isAuthenticated => {
+        if (!isAuthenticated) {
+            window.location.href = 'login.html';
+        }
+    });
 });

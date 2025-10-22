@@ -6,6 +6,35 @@ const AppState = {
   currentPage: window.location.pathname.split('/').pop() || 'welcome.html'
 };
 
+// Authentication check function
+async function checkAuth() {
+  // First check localStorage (for compatibility)
+  const userData = localStorage.getItem('fyndUser');
+  if (userData) {
+    return true;
+  }
+  
+  // Then check Supabase session
+  try {
+    const { supabase } = await import('./supabaseClient.js');
+    const { data: { session } } = await supabase.auth.getSession();
+    if (session) {
+      // Set user data in localStorage for compatibility
+      const userData = {
+        email: session.user.email,
+        name: session.user.user_metadata?.full_name || session.user.email.split('@')[0],
+        id: session.user.id
+      };
+      localStorage.setItem('fyndUser', JSON.stringify(userData));
+      return true;
+    }
+  } catch (error) {
+    console.error('Error checking Supabase session:', error);
+  }
+  
+  return false;
+}
+
 function saveState() {
   localStorage.setItem('fyndCart', JSON.stringify(AppState.cart));
   localStorage.setItem('fyndWishlist', JSON.stringify(AppState.wishlist));

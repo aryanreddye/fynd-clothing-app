@@ -60,12 +60,21 @@ document.addEventListener('DOMContentLoaded', function() {
         showNotification('Edit profile feature coming soon!');
     };
 
-    window.logout = function() {
+    window.logout = async function() {
         if (confirm('Are you sure you want to logout?')) {
+            // Clear Supabase session
+            try {
+                const { supabase } = await import('./supabaseClient.js');
+                await supabase.auth.signOut();
+            } catch (error) {
+                console.error('Error signing out from Supabase:', error);
+            }
+            
             // Clear user data
             localStorage.removeItem('fyndUser');
             localStorage.removeItem('fyndCart');
             localStorage.removeItem('fyndWishlist');
+            sessionStorage.removeItem('loggedIn');
             
             // Redirect to welcome page immediately
             window.location.href = '../index.html';
@@ -73,5 +82,11 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     // Initialize
-    loadProfile();
+    checkAuth().then(isAuthenticated => {
+        if (!isAuthenticated) {
+            window.location.href = 'login.html';
+        } else {
+            loadProfile();
+        }
+    });
 });

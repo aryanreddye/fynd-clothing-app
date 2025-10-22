@@ -18,6 +18,14 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log('Login success:', data);
       // Mark login in sessionStorage temporarily
       sessionStorage.setItem('loggedIn', 'true');
+      
+      // Set user data in localStorage for compatibility with existing auth checks
+      const userData = {
+        email: data.user.email,
+        name: data.user.user_metadata?.full_name || data.user.email.split('@')[0],
+        id: data.user.id
+      };
+      localStorage.setItem('fyndUser', JSON.stringify(userData));
 
       // Redirect to homepage
       window.location.replace('home.html');

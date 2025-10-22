@@ -104,9 +104,10 @@ document.addEventListener('DOMContentLoaded', function() {
     loadCart();
     
     // Check authentication
-    const userData = localStorage.getItem('fyndUser');
-    if (!userData) {
-        // User not logged in, redirect to login
-        window.location.href = 'login.html';
-    }
+    checkAuth().then(isAuthenticated => {
+        if (!isAuthenticated) {
+            // User not logged in, redirect to login
+            window.location.href = 'login.html';
+        }
+    });
 });

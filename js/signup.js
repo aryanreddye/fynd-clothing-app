@@ -33,6 +33,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Step 2: If successful
     alert('Signup successful! Please check your email to confirm your account.');
+    
+    // Set user data in localStorage for compatibility with existing auth checks
+    const userData = {
+      email: data.user.email,
+      name: data.user.user_metadata?.full_name || name,
+      id: data.user.id
+    };
+    localStorage.setItem('fyndUser', JSON.stringify(userData));
+    
     window.location.href = 'login.html';
   });
 });
