@@ -87,24 +87,7 @@
             </a>
         </div>
     </nav>
-    <script type="module">
-  import { supabase } from './js/supabaseClient.js';
-
-  document.addEventListener('DOMContentLoaded', async () => {
-    const { data: { session } } = await supabase.auth.getSession();
-
-    // Redirect back to login if not logged in
-    if (!session && sessionStorage.getItem('loggedIn') !== 'true') {
-      window.location.replace('login.html');
-    }
-
-    // Optional: show user info
-    if (session) {
-      const userEmail = session.user.email;
-      document.getElementById('userEmail').textContent = userEmail;
-    }
-  });
-    </script>
+    
     <script src="../js/global.js"></script>
     <script src="../js/pwa.js"></script>
     <script type="module"   src="../js/home.js"></script>

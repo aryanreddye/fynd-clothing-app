@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const swipeRightBtn = document.getElementById('swipeRight');
     const genderBtns = document.querySelectorAll('.gender-btn');
     const filterBtn = document.getElementById('filterBtn');
-
+    const navLinks = document.querySelectorAll('.nav-item');
     // Filter button click handler
     filterBtn.addEventListener('click', () => {
         // Save current state if needed
@@ -319,8 +319,8 @@ document.addEventListener('DOMContentLoaded', function() {
     loadProducts();
     
     // Check authentication
-    const userData = localStorage.getItem('fyndUser');
-    if (!userData) {
-        window.location.href = 'login.html';
-    }
+    //const userData = localStorage.getItem('fyndUser');
+    //if (!userData) {
+    //    window.location.href = 'login.html';
+    //}
 });
