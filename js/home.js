@@ -134,12 +134,25 @@ document.addEventListener('DOMContentLoaded', function() {
         card.style.zIndex = 100 - index;
         card.style.transform = `scale(${1 - index * 0.05}) translateY(${index * 10}px)`;
         
+        // Get model filename - use product.model if available, otherwise derive from image
+        const modelName = product.model || getModelFileName(product.image);
+        
+        // Set data-model attribute
+        card.setAttribute('data-model', modelName);
+        
+        // Escape quotes for onclick handler
+        const escapedImage = product.image.replace(/'/g, "\\'");
+        const escapedModel = modelName.replace(/'/g, "\\'");
+        
         card.innerHTML = `
             <img src="${product.image}" alt="${product.name}" class="card-image">
             <div class="card-info">
                 <div class="card-category">${product.category}</div>
                 <h3 class="card-title">${product.name}</h3>
                 <div class="card-price">${formatPrice(product.price)}</div>
+                <button class="ar-try-btn" onclick="event.stopPropagation(); openARViewer('${escapedImage}', '${escapedModel}')">
+                    👗 Try in AR
+                </button>
             </div>
             <div class="swipe-indicator left">NOPE</div>
             <div class="swipe-indicator right">LIKE</div>

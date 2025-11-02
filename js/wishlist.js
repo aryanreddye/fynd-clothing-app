@@ -23,13 +23,22 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        wishlistContainer.innerHTML = wishlist.map(item => `
-            <div class="wishlist-item" data-product-id="${item.id}">
+        wishlistContainer.innerHTML = wishlist.map(item => {
+            // Get model filename - use item.model if available, otherwise derive from image
+            const modelName = item.model || getModelFileName(item.image);
+            // Escape quotes for onclick handler
+            const escapedImage = item.image.replace(/'/g, "\\'");
+            const escapedModel = modelName.replace(/'/g, "\\'");
+            return `
+            <div class="wishlist-item" data-product-id="${item.id}" data-model="${modelName}">
                 <img src="${item.image}" alt="${item.name}" class="wishlist-item-image">
                 <div class="wishlist-item-info">
                     <div class="wishlist-item-category">${item.category}</div>
                     <h3 class="wishlist-item-title">${item.name}</h3>
                     <div class="wishlist-item-price">${formatPrice(item.price)}</div>
+                    <button class="ar-try-btn" onclick="event.stopPropagation(); openARViewer('${escapedImage}', '${escapedModel}')">
+                        👗 Try in AR
+                    </button>
                     <div class="wishlist-item-actions">
                         <button class="btn-add-to-cart" onclick="addToCartFromWishlist(${JSON.stringify(item).replace(/"/g, '&quot;')})">
                             <i class="fas fa-shopping-cart"></i>
@@ -41,7 +50,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 </div>
             </div>
-        `).join('');
+        `;
+        }).join('');
     }
 
     // Global functions for wishlist actions

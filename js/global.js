@@ -133,6 +133,7 @@ function getProducts() {
       category: "tops", 
       gender: "female", 
       image: "../images/img1.png",
+      model: "dress1M",  // Custom model name - will use dress1M.glb from /models/
       style: "formal",
       brand: "zara",
       color: "red",
@@ -407,6 +408,76 @@ function getProducts() {
   ];
 }
 
+// AR Viewer Functions
+function getModelFileName(imagePath) {
+  // Extract filename from image path (e.g., "../images/img1.png" -> "img1")
+  const filename = imagePath.split('/').pop().split('\\').pop();
+  const nameWithoutExt = filename.replace(/\.(png|jpg|jpeg)$/i, '');
+  return nameWithoutExt;
+}
+
+function openARViewer(imagePath, modelName = null) {
+  const overlay = document.getElementById('arViewerOverlay');
+  const modelViewer = document.getElementById('arModelViewer');
+  
+  if (!overlay || !modelViewer) {
+    console.error('AR viewer elements not found');
+    return;
+  }
+  
+  // Use provided model name, or get from image path
+  const finalModelName = modelName || getModelFileName(imagePath);
+  const modelPath = `../models/${finalModelName}.glb`;
+  
+  // Set model source
+  modelViewer.src = modelPath;
+  
+  // Show overlay
+  overlay.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+  
+  // Setup close button
+  const closeBtn = document.getElementById('arCloseBtn');
+  if (closeBtn) {
+    closeBtn.onclick = closeARViewer;
+  }
+  
+  // Close on overlay click (outside model-viewer)
+  overlay.onclick = function(e) {
+    if (e.target === overlay) {
+      closeARViewer();
+    }
+  };
+}
+
+function closeARViewer() {
+  const overlay = document.getElementById('arViewerOverlay');
+  if (overlay) {
+    overlay.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+}
+
+let escapeKeyListenerAdded = false;
+
+function initARViewer() {
+  // Initialize AR viewer close functionality
+  const closeBtn = document.getElementById('arCloseBtn');
+  if (closeBtn) {
+    closeBtn.onclick = closeARViewer;
+  }
+  
+  // Close on Escape key (only add listener once)
+  if (!escapeKeyListenerAdded) {
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeARViewer();
+      }
+    });
+    escapeKeyListenerAdded = true;
+  }
+}
+
 function initApp() {
   AppState.currentPage = window.location.pathname.split('/').pop() || 'welcome.html';
   setActiveNavItem();
@@ -414,6 +485,9 @@ function initApp() {
   
   const mainContent = document.querySelector('.main-content');
   if (mainContent) mainContent.classList.add('fade-in');
+  
+  // Initialize AR viewer
+  initARViewer();
 }
 
 initApp();
