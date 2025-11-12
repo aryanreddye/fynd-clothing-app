@@ -1,17 +1,16 @@
-/* Welcome Page Styles - COMPLETELY CLEAN VERSION */
 * {
   border: none !important;
   outline: none !important;
   box-shadow: none !important;
 }
 
-/* Remove Live Server debug borders */
+
 [style*="border"], [style*="outline"] {
   border: none !important;
   outline: none !important;
 }
 
-/* Force remove all borders from any element */
+
 body, html, div, span, a, button, input, textarea, select {
   border: none !important;
   outline: none !important;

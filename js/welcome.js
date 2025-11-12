@@ -1,11 +1,9 @@
-// Welcome Page JavaScript
 
 document.addEventListener('DOMContentLoaded', function() {
     // Add entrance animation to elements
     const logoContainer = document.querySelector('.logo-container');
     const enterBtn = document.querySelector('.enter-btn');
     
-    // Add entrance animation to logo container
     if (logoContainer) {
         logoContainer.style.opacity = '0';
         logoContainer.style.transform = 'scale(0.8)';
@@ -17,7 +15,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 500);
     }
     
-    // Add hover effect to the enter button
     if (enterBtn) {
         enterBtn.addEventListener('mouseenter', function() {
             this.style.transform = 'translateY(-2px)';

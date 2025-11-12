@@ -1,4 +1,7 @@
-const CACHE_NAME = 'fynd-v1.0.0';
+// ✅ Version your cache — bump this every time you update files
+const CACHE_VERSION = 'v1.1.0';
+const CACHE_NAME = `fynd-${CACHE_VERSION}`;
+
 const urlsToCache = [
   '/',
   '/index.html',
@@ -27,49 +30,73 @@ const urlsToCache = [
   '/manifest.json'
 ];
 
-// Install event - cache resources
+// ✅ Install event — cache important resources immediately
 self.addEventListener('install', event => {
+  console.log('[SW] Installing new version:', CACHE_VERSION);
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => {
-        console.log('Opened cache');
-        return cache.addAll(urlsToCache);
-      })
-  );
-});
-
-// Fetch event - serve from cache if available
-self.addEventListener('fetch', event => {
-  event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        // Return cached version or fetch from network
-        if (response) {
-          return response;
-        }
-        return fetch(event.request);
-      }
-    )
-  );
-});
-
-// Activate event - clean up old caches
-self.addEventListener('activate', event => {
-  event.waitUntil(
-    caches.keys().then(cacheNames => {
-      return Promise.all(
-        cacheNames.map(cacheName => {
-          if (cacheName !== CACHE_NAME) {
-            console.log('Deleting old cache:', cacheName);
-            return caches.delete(cacheName);
-          }
-        })
-      );
+    caches.open(CACHE_NAME).then(cache => {
+      console.log('[SW] Caching files');
+      return cache.addAll(urlsToCache);
+    }).then(() => {
+      // Force new SW to activate right away
+      return self.skipWaiting();
     })
   );
 });
 
-// Background sync for offline actions
+// ✅ Activate event — clean up old caches and take control
+self.addEventListener('activate', event => {
+  console.log('[SW] Activating new version:', CACHE_VERSION);
+  event.waitUntil(
+    caches.keys().then(cacheNames => {
+      return Promise.all(
+        cacheNames.map(name => {
+          if (name !== CACHE_NAME) {
+            console.log('[SW] Deleting old cache:', name);
+            return caches.delete(name);
+          }
+        })
+      );
+    }).then(() => {
+      // Take control of all open clients immediately
+      return self.clients.claim();
+    })
+  );
+});
+
+// ✅ Fetch event — try cache first, then network, and update cache in background
+self.addEventListener('fetch', event => {
+  // Ignore requests to Supabase or external APIs (always fetch fresh)
+  if (event.request.url.includes('supabase.co') || event.request.method !== 'GET') {
+    return;
+  }
+
+  event.respondWith(
+    caches.match(event.request).then(cachedResponse => {
+      if (cachedResponse) {
+        // Try to update cache in the background
+        fetch(event.request).then(networkResponse => {
+          caches.open(CACHE_NAME).then(cache => {
+            cache.put(event.request, networkResponse.clone());
+          });
+        }).catch(() => {});
+        return cachedResponse;
+      }
+      // If not cached, fetch from network
+      return fetch(event.request).then(response => {
+        // Cache new files for next time
+        const clone = response.clone();
+        caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
+        return response;
+      }).catch(() => {
+        // Optional: return a fallback page or image if offline
+        return caches.match('/index.html');
+      });
+    })
+  );
+});
+
+// ✅ Background sync (optional)
 self.addEventListener('sync', event => {
   if (event.tag === 'background-sync') {
     event.waitUntil(doBackgroundSync());
@@ -77,7 +104,6 @@ self.addEventListener('sync', event => {
 });
 
 function doBackgroundSync() {
-  // Handle offline actions when connection is restored
-  console.log('Background sync triggered');
-  // Add your offline action handling here
+  console.log('[SW] Background sync triggered');
+  // Add offline retry logic here (e.g., re-sync cart data)
 }
