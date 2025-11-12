@@ -1,5 +1,4 @@
 // public/js/signup.js
-// signup.js
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
 const SUPABASE_URL = 'https://aqsitvdwczcaqdgedrra.supabase.co';
@@ -16,11 +15,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const email = document.getElementById('email').value.trim();
     const password = document.getElementById('password').value;
 
+    // ✅ Include redirect URL so Supabase auto-logs in after verification
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
         data: { full_name: name },
+        emailRedirectTo: `${window.location.origin}/html/home.html`
       },
     });
 
@@ -30,16 +31,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     alert('Signup successful! Please check your email to confirm your account.');
-    
+
+    // ✅ Store minimal info temporarily
     const userData = {
-      email: data.user.email,
-      name: data.user.user_metadata?.full_name || name,
-      id: data.user.id
+      email,
+      name,
     };
-    localStorage.setItem('fyndUser', JSON.stringify(userData));
-    
-    window.location.href = 'login.html';
+    localStorage.setItem('pendingSignup', JSON.stringify(userData));
+
+    // ✅ Instead of sending them to login page manually
+    // we can just show message or stay on same page
+    // since Supabase will handle redirect after verification.
   });
 });
-
-
