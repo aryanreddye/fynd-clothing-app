@@ -316,6 +316,7 @@ function getProducts() {
       category: "outerwear", 
       gender: "male", 
       image: "../images/img1.1.png",
+      model: "dress1M.glb",
       style: "formal",
       brand: "zara",
       color: "blue",
